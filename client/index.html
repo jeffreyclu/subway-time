@@ -14,9 +14,11 @@
             font-family: Arial, Helvetica, sans-serif;
             font-weight: 700;
             font-size: 2rem;
+            overflow: hidden;
         }
 
         section.title {
+            z-index: 2;
             margin: 10vh 0 5vh 0;
         }
 
@@ -118,11 +120,83 @@
         p {
             color: grey;
         }
+
+        @media only screen and (min-width: 800px) {
+            div.tunnel {
+                z-index: 0;
+                position: absolute;
+                top: 100px;
+                width: 100vw;
+                height: 200px;
+                background-color: black;
+            }
+
+            div.column {
+                height: 200px;
+                width: 1vw;
+                background-color: black;
+                z-index: 1;
+            }
+
+            div.column__container {
+                position: absolute;
+                top: 100px;
+                width: 100vw;
+                height: 200px;
+                display: flex;
+                flex-flow: row;
+                justify-content: space-between;
+            }
+
+            div.train {
+                z-index: 1;
+                position: absolute;
+                top: 100px;
+                background-image: url('./assets/test.svg');
+                background-color: black;
+                width: 800px;
+                height: 200px;
+                background-position: bottom;
+                background-repeat: no-repeat;
+                background-size: 800px 120px;
+                animation-name: moveTrain;
+                animation-duration: 10s;
+                animation-iteration-count: infinite;
+            }
+
+            @keyframes moveTrain {
+
+                0% {
+                    right: -800px;
+                }
+
+                25% {
+                    right: -800px;
+                }
+
+                60% {
+                    right: 100vw;
+                }
+
+                100% {
+                    right: 100vw;
+                }
+
+            }
+
+        }
     </style>
 
 </head>
 
 <body>
+    <div class="train"></div>
+    <div class="tunnel"></div>
+    <div class="column__container">
+        <div class="column"></div>
+        <div class="column"></div>
+        <div class="column"></div>
+    </div>
     <section class="title">
         <h1>DeKalb Station</h1>
         <div class="symbol__container">
@@ -159,6 +233,13 @@
     </footer>
 
     <script>
+        const displayColumns = () => {
+            for (let i = 0; i < 20; i++) {
+                const column = document.createElement('div');
+                column.setAttribute("class", "column");
+                document.querySelector(".column__container").append(column);
+            }
+        }
         const formatTime = (rawTime) => {
             const hours = rawTime.getHours();
             const minutes = "0" + rawTime.getMinutes();
@@ -196,6 +277,7 @@
         window.onload = () => {
             displayTime();
             displaySchedule();
+            displayColumns();
             setInterval(displayTime, 1000);
             setInterval(displaySchedule, 30000);
         }

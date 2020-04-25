@@ -12,6 +12,8 @@ const path = require('path')
 
 const subwayRouter = require('./routes/subway');
 
+app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
+
 app.use('/subway', subwayRouter);
 
 app.get('/', (req, res) => {

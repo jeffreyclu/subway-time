@@ -7,7 +7,7 @@ const mta = new Mta({
 const fs = require('fs')
 const express = require('express');
 const app = new express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 const path = require('path')
 
 const subwayRouter = require('./routes/subway');

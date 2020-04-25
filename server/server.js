@@ -12,12 +12,12 @@ const path = require('path')
 
 const subwayRouter = require('./routes/subway');
 
-app.use('/assets', express.static('../client/assets'));
+app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
 
 app.use('/subway', subwayRouter);
 
 app.get('/', (req, res) => {
-  res.status(200).sendFile('../client/index.html');
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 app.get('*', (req, res) => {

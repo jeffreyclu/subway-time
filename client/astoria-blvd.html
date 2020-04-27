@@ -13,11 +13,10 @@
         <div class="column"></div>
     </div>
     <section class="title">
-        <h1>DeKalb Station</h1>
+        <h1>Astoria Blvd Station</h1>
         <div class="symbol__container">
-            <span class="symbol B"></span>
-            <span class="symbol Q"></span>
-            <span class="symbol R"></span>
+            <span class="symbol N"></span>
+            <span class="symbol W"></span>
         </div>
     </section>
     <section class="current">
@@ -69,7 +68,7 @@
         }
 
         const displaySchedule = () => {
-            fetch('/subway')
+            fetch('/subway/astoria-blvd')
                 .then(resp => resp.json())
                 .then(data => {
                     const schedule = { ...data.schedule };

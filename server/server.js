@@ -7,14 +7,18 @@ const mta = new Mta({
 const fs = require('fs')
 const express = require('express');
 const app = new express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const path = require('path')
 
 const subwayRouter = require('./routes/subway');
 
-app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
+app.use(express.static(path.join(__dirname, '../client/')));
 
 app.use('/subway', subwayRouter);
+
+app.get('/astoria-blvd', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../client/astoria-blvd.html'))
+})
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'));

@@ -21,4 +21,20 @@ subwayController.getSchedule = (req, res, next) => {
     });
 }
 
+subwayController.getScheduleAstoria = (req, res, next) => {
+
+    mta.schedule('R03', 16).then(function (result) {
+        try {
+            res.locals.schedule = { ...result.schedule['R03'] };
+            next();
+        }
+        catch(e) {
+            next({
+                log: `subwayController.getSchedule ERROR: ${e}`,
+                message: { err: 'subwayController.getSchedule ERROR: Check server logs for details' },
+            })
+        }
+    });
+}
+
 module.exports = subwayController;

@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #2a2a2a;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+section.title {
+    z-index: 2;
+    margin: 10vh 0 5vh 0;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 6rem;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+div.symbol__container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+span.symbol {
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: #fff;
+}
+
+span.small__symbol {
+    width: 2em;
+    height: 2em;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.B {
+    background-image: url('./assets/B.svg');
+}
+
+.N {
+    background-image: url('./assets/N.svg');
+}
+
+.Q {
+    background-image: url('./assets/Q.svg');
+}
+
+.R {
+    background-image: url('./assets/R.svg');
+}
+
+.W {
+    background-image: url('./assets/W.svg');
+}
+
+section.current {
+    margin: 0 0 5vh 0;
+}
+
+div.schedule__container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid yellowgreen;
+    border-radius: 1rem;
+    padding-top: 1rem;
+    width: 95vw;
+}
+
+div.schedule__container div {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 5vw 0 5vw;
+}
+
+li {
+    margin: 0;
+    padding: 0;
+    color: yellowgreen;
+}
+
+ul {
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    color: grey;
+}
+
+div.tunnel {
+    z-index: 0;
+    position: absolute;
+    top: 100px;
+    width: 100vw;
+    height: 200px;
+    background-color: black;
+}
+
+div.column {
+    height: 200px;
+    width: 1vw;
+    background-color: black;
+    z-index: 1;
+}
+
+div.column__container {
+    position: absolute;
+    top: 100px;
+    width: 100vw;
+    height: 200px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+div.train {
+    z-index: 1;
+    position: absolute;
+    top: 100px;
+    background-image: url('./assets/test.svg');
+    background-color: black;
+    width: 800px;
+    height: 200px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 800px 120px;
+    animation-name: moveTrain;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes moveTrain {
+
+    0% {
+        right: -800px;
+    }
+
+    25% {
+        right: -800px;
+    }
+
+    60% {
+        right: 100vw;
+    }
+
+    100% {
+        right: 100vw;
+    }
+
+}
+

@@ -32,8 +32,13 @@ fileController.searchStations = (req, res, next) => {
         let results = res.locals.stations.filter(station => JSON.stringify(station["Stop Name"]).toLowerCase().includes(searchId.toLowerCase()) && station["GTFS Stop ID"] !== 901 && station["GTFS Stop ID"] !== 902);
         results.forEach(result=>{
           const feeds = new Set();
+          //handles Sutphin Blvd - Archer Av - JFK Airport that has a weird route (E J Z lines)
           if (result["GTFS Stop ID"] === 'G06') {
             result["Feeds"] = ['36'];
+          }
+          //handles stations with B Q lines that require the 'NQRW' line feed instead of 'BDFM'
+          else if (result["GTFS Stop ID"][0] === 'D' && result["Daytime Routes"] === 'B Q') {
+            result["Feeds"] = ['16'];
           }
           else {
             const searchRoute = JSON.stringify(result["GTFS Stop ID"]).replace(/("|')/g, "")[0];

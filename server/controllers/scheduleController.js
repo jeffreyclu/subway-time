@@ -3,7 +3,7 @@ const mta = new Mta({
   key: 'd990c8a9559d42fdb1e01deaff01ba7e', // only needed for mta.schedule() method
   // feed_id: 16                  // optional, default = 1
 });
-const fetch = require('node-fetch')
+
 const scheduleController = {};
 
 scheduleController.getSchedule = (req, res, next) => {

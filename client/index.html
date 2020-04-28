@@ -5,19 +5,19 @@
 </head>
 
 <body>
-    <div class="train"></div>
-    <div class="tunnel"></div>
-    <div class="column__container">
-        <div class="column"></div>
-        <div class="column"></div>
-        <div class="column"></div>
-    </div>
+    <header class="search">
+        <input type="text" id="stationInput" placeholder="Search Stations" autocomplete="off"></input>
+        <span class="search__icon"></span>
+        <div id="searchResults" class="search-results"></div>
+    </header>
+    <section class="train-container">
+        <div class="train"></div>
+        <div class="tunnel"></div>
+        <div class="column__container"></div>
+    </section>
     <section class="title">
-        <h1>DeKalb Station</h1>
+        <h1 id="stationName"></h1>
         <div class="symbol__container">
-            <span class="symbol B"></span>
-            <span class="symbol Q"></span>
-            <span class="symbol R"></span>
         </div>
     </section>
     <section class="current">
@@ -27,18 +27,12 @@
     <div class="schedule__container">
         <div>
             <h3>Northbound</h3>
-            <ol>
-                <li id="n1"></li>
-                <li id="n2"></li>
-                <li id="n3"></li>
+            <ol id="northbound">
             </ol>
         </div>
         <div>
             <h3>Southbound</h3>
-            <ol>
-                <li id="s1"></li>
-                <li id="s2"></li>
-                <li id="s3"></li>
+            <ol id="southbound">
             </ol>
         </div>
     </div>
@@ -48,6 +42,7 @@
     </footer>
 
     <script>
+        //generates columns
         const displayColumns = () => {
             for (let i = 0; i < 20; i++) {
                 const column = document.createElement('div');
@@ -55,6 +50,8 @@
                 document.querySelector(".column__container").append(column);
             }
         }
+
+        //helper function to format time
         const formatTime = (rawTime) => {
             const hours = rawTime.getHours();
             const minutes = "0" + rawTime.getMinutes();
@@ -63,24 +60,51 @@
             return formattedTime;
         }
 
+        //handles displaying the current time
         const displayTime = () => {
             currentTimeRaw = new Date();
             return document.querySelector('#currentTime').innerHTML = `${formatTime(currentTimeRaw)}`;
         }
 
-        const displaySchedule = () => {
-            fetch('/subway')
+        //handles generating route symbols
+        const displayRoutes = (routes) => {
+            document.querySelector(".symbol__container").innerHTML = "";
+            routes.forEach(route => {
+                const symbol = document.createElement("span");
+                symbol.setAttribute("class", `symbol ${route}`);
+                document.querySelector(".symbol__container").append(symbol);
+            })
+            return;
+        }
+
+        //handles generating station schedules
+        const generateSchedule = (schedule, direction) => {
+            document.querySelector(`#${direction}`).innerHTML = "";
+            const sLength = schedule.length < 3 ? schedule.length : 3;
+            for (let i = 0; i < sLength; i++) {
+                const item = document.createElement("li");
+                const trainTime = new Date(schedule[i].departureTime * 1000);
+                item.innerHTML = `${schedule[i].routeId} train departing at ${formatTime(trainTime)}`;
+                document.querySelector(`#${direction}`).append(item);
+            }
+            return;
+        }
+
+        //handles fetching schedule data
+        const displaySchedule = (stationId, feedId, routeStr) => {
+            localStorage.setItem("cache", JSON.stringify({ stationId: stationId, feedId: feedId, routeStr: routeStr }));
+            const routes = routeStr === "SIR" ? ["SIR"] : routeStr.split(" ");
+            const url = `/get/${stationId}/${feedId}`
+            fetch(url)
                 .then(resp => resp.json())
                 .then(data => {
+                    document.querySelector("#stationName").innerHTML = data.stopName
                     const schedule = { ...data.schedule };
                     const northboundTrains = [...schedule['N']];
                     const southboundTrains = [...schedule['S']];
-                    for (let i = 0; i < 3; i++) {
-                        const northTrainTime = new Date(northboundTrains[i].departureTime * 1000);
-                        document.querySelector(`#n${i + 1}`).innerHTML = `${northboundTrains[i].routeId} train departing at ${formatTime(northTrainTime)}`;
-                        const southTrainTime = new Date(southboundTrains[i].departureTime * 1000);
-                        document.querySelector(`#s${i + 1}`).innerHTML = `${southboundTrains[i].routeId} train departing at ${formatTime(southTrainTime)}`;
-                    }
+                    generateSchedule(northboundTrains, "northbound");
+                    generateSchedule(southboundTrains, "southbound");
+                    displayRoutes(routes);
                     const updateTime = new Date();
                     return document.querySelector('#updateTime').innerHTML = `Last updated at: ${formatTime(updateTime)}`;
                 })
@@ -89,12 +113,54 @@
                 })
         }
 
+        //generate and display search results
+        const generateSearchResults = (arr) => {
+            document.querySelector("#searchResults").innerHTML = "";
+            arr.forEach(item => {
+                const resultContainer = document.createElement('div');
+                resultContainer.setAttribute("class", "search-result");
+                const stationName = document.createElement('div');
+                const stationLines = document.createElement('div');
+                stationName.innerHTML = `<a onClick="displaySchedule('${item["GTFS Stop ID"]}', '${item["Feeds"][0]}', '${item["Daytime Routes"]}')">${item["Stop Name"]}</a>`;
+                stationLines.innerHTML = `(${item["Daytime Routes"]} Lines)`;
+                resultContainer.append(stationName, stationLines);
+                document.querySelector("#searchResults").append(resultContainer);
+            })
+        }
+
+        //handle searching
+        document.querySelector("#stationInput").addEventListener("keyup", (e) => {
+            if (e.keyCode === 27) {
+                document.querySelector("#searchResults").innerHTML = "";
+                document.querySelector("#stationInput").value = "";
+            }
+
+            searchTerm = document.querySelector("#stationInput").value;
+            if (searchTerm !== "") {
+                fetch(`/search/${searchTerm}`, {
+                    method: 'post'
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        generateSearchResults(data.searchResults);
+                    })
+            }
+        })
+
+        //handle escaping from searching
+        document.addEventListener("click", () => {
+            document.querySelector("#stationInput").value = "";
+            document.querySelector("#searchResults").innerHTML = "";
+        })
+
         window.onload = () => {
+            let searchTerms = localStorage.getItem("cache") ? JSON.parse(localStorage.getItem("cache")) : { stationId: "R30", feedId: "16", routeStr: "B Q R" };
+            let { stationId, feedId, routeStr } = searchTerms;
             displayTime();
-            displaySchedule();
+            displaySchedule(stationId, feedId, routeStr);
             displayColumns();
             setInterval(displayTime, 1000);
-            setInterval(displaySchedule, 30000);
+            setInterval(displaySchedule(stationId, feedId, routeStr), 30000);
         }
     </script>
 </body>

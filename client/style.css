@@ -10,7 +10,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 2rem;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 section.title {
@@ -49,6 +49,15 @@ div.symbol__container {
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 span.symbol {
     width: 150px;
     height: 150px;
@@ -66,8 +75,55 @@ span.small__symbol {
     background-size: contain;
 }
 
+span.search__icon {
+    position: absolute;
+    right: 0;
+    height: 100px;
+    width: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7e/Vector_search_icon.svg');
+    background-size: 3rem 3rem;
+}
+
+.A {
+    background-image: url('./assets/A.svg');
+}
+
 .B {
     background-image: url('./assets/B.svg');
+}
+
+.C {
+    background-image: url('./assets/C.svg');
+}
+
+.D {
+    background-image: url('./assets/D.svg');
+}
+
+.E {
+    background-image: url('./assets/E.svg');
+}
+
+.F {
+    background-image: url('./assets/F.svg');
+}
+
+.G {
+    background-image: url('./assets/G.svg');
+}
+
+.J {
+    background-image: url('./assets/J.svg');
+}
+
+.L {
+    background-image: url('./assets/L.svg');
+}
+
+.M {
+    background-image: url('./assets/M.svg');
 }
 
 .N {
@@ -82,8 +138,44 @@ span.small__symbol {
     background-image: url('./assets/R.svg');
 }
 
+.SIR {
+    background-image: url('./assets/SI.svg');
+}
+
 .W {
     background-image: url('./assets/W.svg');
+}
+
+.Z {
+    background-image: url('./assets/Z.svg');
+}
+
+.\31 {
+    background-image: url('./assets/1.svg');
+}
+
+.\32 {
+    background-image: url('./assets/2.svg');
+}
+
+.\33 {
+    background-image: url('./assets/3.svg');
+}
+
+.\34 {
+    background-image: url('./assets/4.svg');
+}
+
+.\35 {
+    background-image: url('./assets/5.svg');
+}
+
+.\36 {
+    background-image: url('./assets/6.svg');
+}
+
+.\37 {
+    background-image: url('./assets/7.svg');
 }
 
 section.current {
@@ -125,27 +217,32 @@ p {
     color: grey;
 }
 
-div.tunnel {
-    z-index: 0;
+section.train-container {
     position: absolute;
     top: 100px;
     width: 100vw;
     height: 200px;
+}
+
+div.tunnel {
+    z-index: 0;
+    height: 200px;
+    width: 100vw;
+    position: absolute;
     background-color: black;
 }
 
 div.column {
-    height: 200px;
     width: 1vw;
+    height: 200px;
     background-color: black;
     z-index: 1;
 }
 
 div.column__container {
     position: absolute;
-    top: 100px;
-    width: 100vw;
     height: 200px;
+    width: 100vw;
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -154,7 +251,6 @@ div.column__container {
 div.train {
     z-index: 1;
     position: absolute;
-    top: 100px;
     background-image: url('./assets/test.svg');
     background-color: black;
     width: 800px;
@@ -187,3 +283,44 @@ div.train {
 
 }
 
+header.search {
+    width: 100vw;
+}
+header.search input {
+    width: 100%;
+    font-size: 3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    padding: 1rem;
+    background-color: #2a2a2a;
+    color: white;
+    border: none;
+    outline: none;
+    overflow: scroll;
+    margin: 0;
+    height: 100px;
+}
+div.search-results {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: white;
+    color: black;
+    opacity: 75%;
+    z-index: 3;
+}
+
+div.search-result {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+div.search-result div {
+    margin: 1rem;
+}

@@ -10,18 +10,16 @@ const app = new express();
 const PORT = process.env.PORT || 3000;
 const path = require('path')
 
-const subwayRouter = require('./routes/subway');
+const searchRouter = require('./routes/search');
+const scheduleRouter = require('./routes/schedule');
 
 app.use(express.static(path.join(__dirname, '../client/')));
 
-app.use('/subway', subwayRouter);
-
-app.get('/astoria-blvd', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, '../client/astoria-blvd.html'))
-})
+app.use('/search', searchRouter);
+app.use('/get', scheduleRouter);
 
 app.get('/', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+  res.status(200).sendFile(path.join(__dirname, '../client/search.html'));
 });
 
 app.get('*', (req, res) => {

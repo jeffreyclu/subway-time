@@ -4,7 +4,7 @@ const mta = new Mta({
   // feed_id: 16                  // optional, default = 1
 });
 
-const fs = require('fs');
+// const fs = require('fs');
 const express = require('express');
 const app = new express();
 const PORT = process.env.PORT || 3000;

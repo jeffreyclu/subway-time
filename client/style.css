@@ -5,7 +5,7 @@ body {
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: #2a2a2a;
+    background-color: black;
     background-image: url(/assets/photo-1553441388-dab6b561836c.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -225,7 +225,7 @@ p {
 
 section.train-container {
     position: fixed;
-    bottom: 0px;
+    bottom: 100px;
     width: 100vw;
     height: 200px;
 }

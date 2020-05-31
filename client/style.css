@@ -6,6 +6,10 @@ body {
     justify-content: flex-start;
     align-items: center;
     background-color: #2a2a2a;
+    background-image: url(/assets/photo-1553441388-dab6b561836c.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center -30px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -220,8 +224,8 @@ p {
 }
 
 section.train-container {
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    bottom: 0px;
     width: 100vw;
     height: 200px;
 }
@@ -287,14 +291,21 @@ div.train {
 
 header.search {
     width: 100vw;
+    color: white;
+    opacity: 30%;
 }
+
+header.search:hover {
+    opacity: 100%;
+}
+
 header.search input {
     width: 100%;
     font-size: 3rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     padding: 1rem;
-    background-color: #2a2a2a;
+    background-color: black;
     color: white;
     border: none;
     outline: none;

@@ -5,16 +5,12 @@
 </head>
 
 <body>
-    <header class="search">
+    <header class="search inactive">
         <input type="text" id="stationInput" placeholder="Search Stations" autocomplete="off"></input>
         <span class="search__icon"></span>
         <div id="searchResults" class="search-results"></div>
     </header>
-    <section class="train-container">
-        <div class="train"></div>
-        <div class="tunnel"></div>
-        <div class="column__container"></div>
-    </section>
+
     <section class="title">
         <h1 id="stationName"></h1>
         <div class="symbol__container">
@@ -40,6 +36,12 @@
     <footer>
         <p id="updateTime"></p>
     </footer>
+
+    <section class="train-container">
+        <div class="train"></div>
+        <div class="tunnel"></div>
+        <div class="column__container"></div>
+    </section>
 
     <script>
         //generates columns

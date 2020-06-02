@@ -20,7 +20,7 @@ body {
 
 section.title {
     z-index: 2;
-    margin: 10vh 0 5vh 0;
+    margin: 6vh 0 5vh 0;
 }
 
 h1 {
@@ -28,7 +28,7 @@ h1 {
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    font-size: 6rem;
+    font-size: 4rem;
     text-align: center;
 }
 
@@ -37,7 +37,7 @@ h2 {
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
 }
 
 h3 {
@@ -45,7 +45,7 @@ h3 {
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 div.symbol__container {
@@ -65,8 +65,8 @@ a:hover {
 }
 
 span.symbol {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -74,8 +74,8 @@ span.symbol {
 }
 
 span.small__symbol {
-    width: 2em;
-    height: 2em;
+    width: 1rem;
+    height: 1rem;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -84,12 +84,12 @@ span.small__symbol {
 span.search__icon {
     position: absolute;
     right: 0;
-    height: 100px;
-    width: 100px;
-    background-position: center;
+    height: 80px;
+    width: 80px;
+    background-position: center center;
     background-repeat: no-repeat;
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7e/Vector_search_icon.svg');
-    background-size: 3rem 3rem;
+    background-size: 2rem 2rem;
 }
 
 .A {
@@ -185,7 +185,7 @@ span.search__icon {
 }
 
 section.current {
-    margin: 0 0 5vh 0;
+    margin: 0 0 3vh 0;
 }
 
 div.schedule__container {
@@ -224,8 +224,8 @@ p {
 }
 
 section.train-container {
-    position: fixed;
-    bottom: 100px;
+    position: relative;
+    /* bottom: 100px; */
     width: 100vw;
     height: 200px;
 }
@@ -301,7 +301,7 @@ header.search:hover {
 
 header.search input {
     width: 100%;
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     padding: 1rem;
@@ -311,7 +311,7 @@ header.search input {
     outline: none;
     overflow: scroll;
     margin: 0;
-    height: 100px;
+    height: 80px;
 }
 div.search-results {
     width: 100%;

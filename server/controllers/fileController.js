@@ -7,7 +7,7 @@ fileController.getRoutes = (req, res, next) => {
   const routes = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/feeds.json')));
   if (!routes) {
     return next({
-      log: 'fileController.getRoutes: ERROR: Error getting characters data from characters.json file',
+      log: 'fileController.getRoutes: ERROR: Error getting feeds from feeds.json file',
       message: { err: 'Error occurred in fileController.getRoutes. Check server logs for more details.' },
     });
   }
@@ -19,7 +19,7 @@ fileController.getStations = (req, res, next) => {
   const stations = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/stations.json')));
   if (!stations) {
     return next({
-      log: 'fileController.getStations: ERROR: Error getting characters data from characters.json file',
+      log: 'fileController.getStations: ERROR: Error getting stations from stations.json file',
       message: { err: 'Error occurred in fileController.getStations. Check server logs for more details.' },
     });
   }
@@ -42,15 +42,15 @@ fileController.searchStations = (req, res, next) => {
       }
       // handles Sutphin Blvd - Archer Av - JFK Airport that has a weird route (E J Z lines)
       if (result['GTFS Stop ID'] === 'G06') {
-        result.Feeds = ['36'];
+        result.Feeds = ['-jz'];
       }
       // handles stations with B Q lines that require the 'NQRW' line feed instead of 'BDFM'
       else if (result['GTFS Stop ID'][0] === 'D' && result['Daytime Routes'] === 'B Q') {
-        result.Feeds = ['16'];
+        result.Feeds = ['-nqrw'];
       }
       // handles queens plaza station that has E M and R lines
       else if (result['Stop Name'] === 'Queens Plaza') {
-        result.Feeds = ['16', '21', '26'];
+        result.Feeds = ['-nqrw', '-bdfm', '-ace'];
       } else {
         result.Feeds = Array.from(feeds);
       }

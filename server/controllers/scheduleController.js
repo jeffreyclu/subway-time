@@ -1,8 +1,7 @@
-const Mta = require('mta-gtfs');
+const Mta = require('mta-gtfs-jl');
 
 const mta = new Mta({
-  key: 'd990c8a9559d42fdb1e01deaff01ba7e', // only needed for mta.schedule() method
-  // feed_id: 16                  // optional, default = 1
+  key: process.env.MTA_API_KEY
 });
 
 const scheduleController = {};
@@ -10,7 +9,9 @@ const scheduleController = {};
 scheduleController.getSchedule = (req, res, next) => {
   const { stationId, feedId } = req.params;
   const promises = [];
-  promises.push(mta.schedule(stationId, feedId)
+  let queryFeedId = feedId;
+  if (feedId === '-123456') queryFeedId = undefined;
+  promises.push(mta.schedule(stationId, queryFeedId)
     .then((result) => {
       try {
         res.locals.stationId = stationId;

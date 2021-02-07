@@ -1,10 +1,4 @@
-const Mta = require('mta-gtfs');
-const mta = new Mta({
-  key: 'd990c8a9559d42fdb1e01deaff01ba7e', // only needed for mta.schedule() method
-  // feed_id: 16                  // optional, default = 1
-});
-
-// const fs = require('fs');
+require('dotenv').config();
 const express = require('express');
 const app = new express();
 const PORT = process.env.PORT || 3000;

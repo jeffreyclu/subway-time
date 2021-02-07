@@ -156,7 +156,7 @@
         })
 
         window.onload = () => {
-            let searchTerms = localStorage.getItem("cache") ? JSON.parse(localStorage.getItem("cache")) : { stationId: "R30", feedId: "16", routeStr: "B Q R" };
+            let searchTerms = localStorage.getItem("cache") ? JSON.parse(localStorage.getItem("cache")) : { stationId: "R30", feedId: "-nqrw", routeStr: "B Q R" };
             let { stationId, feedId, routeStr } = searchTerms;
             displayTime();
             displaySchedule(stationId, feedId, routeStr);

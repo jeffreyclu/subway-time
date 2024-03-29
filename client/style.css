@@ -224,8 +224,6 @@ p {
 }
 
 section.train-container {
-    position: absolute;
-    bottom: 0;
     width: 100vw;
     height: 250px;
     overflow-x: hidden;
